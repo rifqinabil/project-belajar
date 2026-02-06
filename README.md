@@ -1,6 +1,6 @@
 # Project Belajar
 
-Kumpulan project **belajar & eksperimen** (ngoding iseng tapi serius). Repo ini sengaja dijadiin satu tempat biar progress kelihatan dan gampang di-cek ulang.
+Repo ini gue pakai buat **belajar** dan **membiasakan diri ngoding** secara konsisten. Isinya campuran project kecil, eksperimen, dan latihan — tujuannya biar skill naik pelan-pelan tapi nyata (ada jejak commit + hasil).
 
 ## Isi Repo
 Semua project ada di folder:
@@ -10,15 +10,35 @@ Project yang (sejauh ini) kelihatan jadi “core”:
 - [`projects/auth-api/`](./projects/auth-api) — eksperimen API/auth (backend)
 - [`projects/cvweb/`](./projects/cvweb) — eksperimen web/CV/portfolio (frontend)
 
-## Cara Pakai Cepat
-> Tiap folder project beda stack. Biasanya tinggal masuk folder project dan ikutin `README`/`package.json`/instruksi di dalamnya.
+## Cara Jalanin (Quick Start)
+Karena ini repo kumpulan, tiap project bisa beda stack. Tapi pola umumnya gini:
 
-Contoh (kalau project-nya Node/Next):
+1) Masuk ke folder project
 ```bash
 cd projects/<nama-project>
+```
+
+2) Baca instruksi project
+- Cek `README.md` di folder project (kalau ada)
+- Kalau belum ada README, minimal cek `package.json` / `requirements.txt` / `pyproject.toml`
+
+### Kalau project-nya Node / Next.js
+```bash
 npm install
 npm run dev
 ```
+
+### Kalau project-nya Python
+```bash
+python -m venv .venv
+.\.venv\Scripts\activate
+pip install -r requirements.txt
+python main.py
+```
+
+### Troubleshooting cepat
+- Kalau error dependency: hapus `node_modules` (kalau ada) lalu `npm install` ulang
+- Pastikan versi Node/Python sesuai (kadang project lama beda versi)
 
 ## Catatan Penting (biar aman)
 - File rahasia kayak `.env`, keys, dan file besar **di-ignore** lewat `.gitignore`.
