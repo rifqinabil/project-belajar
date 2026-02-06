@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>pijat online buat sayang</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h2 { margin-top: 15px; }
+
+  .body-area {
+    width: 90%;
+    max-width: 320px;
+    height: 420px;
+    background: linear-gradient(#ffd6c2, #ffbfa3);
+    border-radius: 40px;
+    position: relative;
+    margin: 20px 0;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    overflow: hidden;
+  }
+
+  .shoulder {
+    width: 140px;
+    height: 120px;
+    background: #ffc2a8;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+  }
+  .left { left: -40px; }
+  .right { right: -40px; }
+
+  /* Titik pijat */
+  .hand {
+    width: 65px;
+    height: 65px;
+    background: #ffffffcc;
+    border-radius: 50%;
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    touch-action: none;
+  }
+
+  @keyframes press {
+    0%   { transform: translate(-50%, 0) scale(1); }
+    50%  { transform: translate(-50%, 18px) scale(0.88); }
+    100% { transform: translate(-50%, 0) scale(1); }
+  }
+
+  .animate {
+    animation: press 1.2s ease-in-out infinite;
+  }
+
+  .controls { margin-bottom: 20px; }
+
+  button {
+    padding: 10px 15px;
+    font-size: 14px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    background: #4a90e2;
+    color: white;
+  }
+</style>
+</head>
+
+<body>
+
+<h2>Pilih Area yang Pegel</h2>
+
+<div class="body-area" id="body">
+  <div class="shoulder left"></div>
+  <div class="shoulder right"></div>
+  <div class="hand" id="hand"></div>
+</div>
+
+<div class="controls">
+  <button onclick="startMassage()">▶ Mulai</button>
+  <button onclick="stopMassage()">⏸ Hentikan</button>
+</div>
+
+<script>
+  const hand = document.getElementById("hand");
+  const body = document.getElementById("body");
+
+  function startMassage() {
+    hand.classList.add("animate");
+  }
+
+  function stopMassage() {
+    hand.classList.remove("animate");
+  }
+
+  // === DRAG SYSTEM (TOUCH + MOUSE) ===
+  let isDragging = false;
+
+  function moveAt(x, y) {
+    const rect = body.getBoundingClientRect();
+
+    let posX = x - rect.left;
+    let posY = y - rect.top;
+
+    // Biar nggak keluar dari badan
+    posX = Math.max(30, Math.min(posX, rect.width - 30));
+    posY = Math.max(30, Math.min(posY, rect.height - 30));
+
+    hand.style.left = posX + "px";
+    hand.style.top = posY + "px";
+    hand.style.transform = "translate(-50%, -50%)";
+  }
+
+  // TOUCH
+  hand.addEventListener("touchstart", () => isDragging = true);
+  document.addEventListener("touchend", () => isDragging = false);
+  document.addEventListener("touchmove", e => {
+    if (!isDragging) return;
+    moveAt(e.touches[0].clientX, e.touches[0].clientY);
+  });
+
+  // MOUSE (biar bisa tes di laptop)
+  hand.addEventListener("mousedown", () => isDragging = true);
+  document.addEventListener("mouseup", () => isDragging = false);
+  document.addEventListener("mousemove", e => {
+    if (!isDragging) return;
+    moveAt(e.clientX, e.clientY);
+  });
+</script>
+
+</body>
+</html>

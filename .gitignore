@@ -1,0 +1,49 @@
+﻿# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Node
+node_modules/
+.npm/
+.yarn/
+*.pnpm-store/
+
+# Build outputs
+/dist/
+/build/
+/out/
+.next/
+coverage/
+
+# Python
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+
+# Secrets
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*id_rsa*
+*id_ed25519*
+
+# Archives / media (often large)
+*.zip
+*.7z
+*.rar
+*.tar
+*.gz
+*.iso
+*.mp4
+*.mov
+*.mkv
+*.psd
+*.ai
+*.fig

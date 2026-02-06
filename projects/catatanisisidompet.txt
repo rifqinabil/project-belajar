@@ -1,0 +1,2 @@
+Tambah saldo: Rp24000
+Transfer ke uus: Rp10000
